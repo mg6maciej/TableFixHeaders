@@ -106,15 +106,15 @@ public class TableFixHeaders extends ViewGroup {
 
 		this.shadows = new ImageView[4];
 		this.shadows[0] = new ImageView(context);
-		this.shadows[0].setImageResource(R.drawable.shadow_left);
+		this.shadows[0].setImageResource(R.drawable.tfh_shadow_left);
 		this.shadows[1] = new ImageView(context);
-		this.shadows[1].setImageResource(R.drawable.shadow_top);
+		this.shadows[1].setImageResource(R.drawable.tfh_shadow_top);
 		this.shadows[2] = new ImageView(context);
-		this.shadows[2].setImageResource(R.drawable.shadow_right);
+		this.shadows[2].setImageResource(R.drawable.tfh_shadow_right);
 		this.shadows[3] = new ImageView(context);
-		this.shadows[3].setImageResource(R.drawable.shadow_bottom);
+		this.shadows[3].setImageResource(R.drawable.tfh_shadow_bottom);
 
-		this.shadowSize = getResources().getDimensionPixelSize(R.dimen.shadow_size);
+		this.shadowSize = getResources().getDimensionPixelSize(R.dimen.tfh_shadow_size);
 
 		this.flinger = new Flinger(context);
 		final ViewConfiguration configuration = ViewConfiguration.get(context);
@@ -433,7 +433,7 @@ public class TableFixHeaders extends ViewGroup {
 	public void removeView(View view) {
 		super.removeView(view);
 
-		final int typeView = (Integer) view.getTag(R.id.tag_type_view);
+		final int typeView = (Integer) view.getTag(R.id.tfh_tag_type_view);
 		if (typeView != TableAdapter.IGNORE_ITEM_VIEW_TYPE) {
 			recycler.addRecycledView(view, typeView);
 		}
@@ -710,8 +710,8 @@ public class TableFixHeaders extends ViewGroup {
 	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
 		final boolean ret;
 
-		final Integer row = (Integer) child.getTag(R.id.tag_row);
-		final Integer column = (Integer) child.getTag(R.id.tag_column);
+		final Integer row = (Integer) child.getTag(R.id.tfh_tag_row);
+		final Integer column = (Integer) child.getTag(R.id.tfh_tag_column);
 		// row == null => Shadow view
 		if (row == null || (row == -1 && column == -1)) {
 			ret = super.drawChild(canvas, child, drawingTime);
@@ -740,9 +740,9 @@ public class TableFixHeaders extends ViewGroup {
 			recycledView = recycler.getRecycledView(itemViewType);
 		}
 		final View view = adapter.getView(row, column, recycledView, this);
-		view.setTag(R.id.tag_type_view, itemViewType);
-		view.setTag(R.id.tag_row, row);
-		view.setTag(R.id.tag_column, column);
+		view.setTag(R.id.tfh_tag_type_view, itemViewType);
+		view.setTag(R.id.tfh_tag_row, row);
+		view.setTag(R.id.tfh_tag_column, column);
 		view.measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY));
 		addTableView(view, row, column);
 		return view;
